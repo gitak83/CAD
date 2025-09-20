@@ -1,0 +1,15 @@
+# Custom Synthesis Script for c1/c2 LUTs
+# Load design
+read_verilog counter5.v
+
+# Generic synthesis
+synth -top Counter_5bit -lut 8
+
+# Technology mapping with custom library
+abc -liberty custom_liberty/custom_luts.lib -dress
+
+# Clean up
+clean -purge
+
+# Write output
+write_verilog -noexpr mapped_design.v
